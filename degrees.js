@@ -39,9 +39,9 @@ function SM(data) {
     }
 
     var frontBackDegrees = data.demo.frontBackDegrees;
-    var boostTimeOut = 300;
-    var speedBoost = 0.5;
-    var speed = 0.1;
+    var boostTimeOut = 200;
+    var speedBoost = 0.05;
+    var speed = 0.05;
     var touchDelay = 1000;
 
     if (frontBackDegrees > 4) {
@@ -116,7 +116,7 @@ function SM(data) {
 }
 
 // client.takeoff();
-// client.config('general:flying_mode', 1);
+client.config('general:flying_mode', 0);
 client.config('control:altitude_max', 1000);
 
 client.takeoff();
