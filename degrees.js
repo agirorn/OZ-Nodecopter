@@ -30,6 +30,9 @@ function blinkRed() {
   client.animateLeds('blinkRed', 5, 1);
 }
 
+var canNavigateFrontBack = true;
+var canNavigateLeftRigth = true;
+
 function SM(data) {
     // if(!(data.demo)) { console.log('no demo!'); return; }
 
@@ -44,7 +47,7 @@ function SM(data) {
     var touchDelay = 1000;
 
     if (frontBackDegrees > 4) {
-      if (canNavigate) {
+      if (canNavigateFrontBack) {
         console.log('back : ' + frontBackDegrees);
         canNavigate = false;
         client.back(speedBoost);
@@ -53,13 +56,13 @@ function SM(data) {
           client.back(speed);
         }, boostTimeOut);
         setTimeout(function() {
-          canNavigate = true;
+          canNavigateFrontBack = true;
           blink();
         }, touchDelay);
       }
     }
     if ( frontBackDegrees < -4) {
-      if (canNavigate) {
+      if (canNavigateFrontBack) {
         console.log('front : ' + frontBackDegrees);
         canNavigate = false;
         client.front(speedBoost);
@@ -68,7 +71,7 @@ function SM(data) {
           client.front(speed);
         }, boostTimeOut);
         setTimeout(function() {
-          canNavigate = true;
+          canNavigateFrontBack = true;
           blink();
         }, touchDelay);
       }
@@ -77,7 +80,7 @@ function SM(data) {
     var leftRightDegrees = data.demo.leftRightDegrees;
 
     if (leftRightDegrees > 4) {
-      if (canNavigate) {
+      if (canNavigateLeftRigth) {
         console.log('back : ' + leftRightDegrees);
         canNavigate = false;
 
@@ -88,13 +91,13 @@ function SM(data) {
         }, boostTimeOut);
 
         setTimeout(function() {
-          canNavigate = true;
+          canNavigateLeftRigth = true;
           blink();
         }, touchDelay);
       }
     }
     if ( leftRightDegrees < -4) {
-      if (canNavigate) {
+      if (canNavigateLeftRigth) {
         console.log('front : ' + leftRightDegrees);
         canNavigate = false;
 
@@ -105,7 +108,7 @@ function SM(data) {
         }, boostTimeOut);
 
         setTimeout(function() {
-          canNavigate = true;
+          canNavigateLeftRigth = true;
           blink();
         }, touchDelay);
       }
