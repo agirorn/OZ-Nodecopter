@@ -12,23 +12,20 @@ var clientSpeed = 0.1;
 var canNavigate = true;
 var navigationTimeout = 500;
 
-function tryToNavigate(callback) {
-  if (!canNavigate) {
-    return;
-  }
-  canNavigate = false;
-  callback();
-  setTimeout(function() {
-    canNavigate = true;
-  }, navigationTimeout);
-}
-
 function blink() {
   client.animateLeds('blinkGreen', 5, 1);
 }
 
 function blinkRed() {
   client.animateLeds('blinkRed', 5, 1);
+}
+
+function say_ping() {
+  // exec('say ping');
+}
+
+function say_pong() {
+  // exec('say pong');
 }
 
 var canNavigateFrontBack = true;
@@ -55,7 +52,7 @@ function SM(data) {
         setTimeout(function() {
           blinkRed();
           client.back(speed);
-          exec('say ping');
+          say_ping();
         }, boostTimeOut);
         setTimeout(function() {
           canNavigateFrontBack = true;
@@ -71,7 +68,7 @@ function SM(data) {
         setTimeout(function() {
           blinkRed();
           client.front(speed);
-          exec('say pong');
+          say_pong();
         }, boostTimeOut);
         setTimeout(function() {
           canNavigateFrontBack = true;
@@ -123,9 +120,9 @@ function SM(data) {
 client.config('control:altitude_max', 1000);
 
 client.takeoff();
-client.after(5000, function() {
-    blink();
+client.after(8000, function() {
     client.on('navdata', SM);
+    blink();
 });
 
 client.after(90000, function() {
