@@ -1,6 +1,7 @@
 /* jshint node: true */
 var arDrone = require('ar-drone');
 var client  = arDrone.createClient();
+var exec = require('child_process').exec;
 
 var x = 0; // x = 1: forwards, x = 0: stop, x = -1: backwards
 var y = 0;
@@ -51,6 +52,7 @@ function SM(data) {
         setTimeout(function() {
           blinkRed();
           client.back(speed);
+          exec('say ping');
         }, boostTimeOut);
         setTimeout(function() {
           canNavigate = true;
@@ -66,6 +68,7 @@ function SM(data) {
         setTimeout(function() {
           blinkRed();
           client.front(speed);
+          exec('say pong');
         }, boostTimeOut);
         setTimeout(function() {
           canNavigate = true;
