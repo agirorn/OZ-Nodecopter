@@ -23,54 +23,58 @@ function tryToNavigate(callback) {
 }
 
 function blink() {
-  client.animateLeds('blinkGreenRed', 5, 1)
+  client.animateLeds('blinkGreen', 5, 1);
 }
+
+function blinkRed() {
+  client.animateLeds('blinkRed', 5, 1);
+}
+
 function SM(data) {
-    if(!(data.demo)) { console.log('no demo!'); return; }
+    // if(!(data.demo)) { console.log('no demo!'); return; }
 
     if (!data.demo) {
       return;
     }
 
-    // var frontBackDegrees = data.demo.frontBackDegrees;
-
-    // if (frontBackDegrees > 4) {
-    //   if (canNavigate) {
-    //     console.log('back : ' + frontBackDegrees);
-    //     canNavigate = false;
-    //     client.back(0.3);
-    //     setTimeout(function() {
-    //       client.back(0.1);
-    //     }, 200);
-    //     setTimeout(function() {
-    //       canNavigate = true;
-    //       blink();
-    //     }, 2000);
-    //   }
-    // }
-    // if ( frontBackDegrees < -4) {
-    //   if (canNavigate) {
-    //     console.log('front : ' + frontBackDegrees);
-    //     canNavigate = false;
-    //     client.front(0.3);
-    //     setTimeout(function() {
-    //       client.front(0.1);
-    //     }, 200);
-    //     setTimeout(function() {
-    //       canNavigate = true;
-    //       blink();
-    //     }, 2000);
-    //   }
-    // }
-
-
-
-    var leftRightDegrees = data.demo.leftRightDegrees;
-
-    var boostTimeOut = 200;
+    var frontBackDegrees = data.demo.frontBackDegrees;
+    var boostTimeOut = 300;
     var speedBoost = 0.5;
     var speed = 0.1;
     var touchDelay = 1000;
+
+    if (frontBackDegrees > 4) {
+      if (canNavigate) {
+        console.log('back : ' + frontBackDegrees);
+        canNavigate = false;
+        client.back(speedBoost);
+        setTimeout(function() {
+          blinkRed();
+          client.back(speed);
+        }, boostTimeOut);
+        setTimeout(function() {
+          canNavigate = true;
+          blink();
+        }, touchDelay);
+      }
+    }
+    if ( frontBackDegrees < -4) {
+      if (canNavigate) {
+        console.log('front : ' + frontBackDegrees);
+        canNavigate = false;
+        client.front(speedBoost);
+        setTimeout(function() {
+          blinkRed();
+          client.front(speed);
+        }, boostTimeOut);
+        setTimeout(function() {
+          canNavigate = true;
+          blink();
+        }, touchDelay);
+      }
+    }
+
+    var leftRightDegrees = data.demo.leftRightDegrees;
 
     if (leftRightDegrees > 4) {
       if (canNavigate) {
@@ -79,6 +83,7 @@ function SM(data) {
 
         client.right(speedBoost);
         setTimeout(function() {
+          blinkRed();
           client.right(speed);
         }, boostTimeOut);
 
@@ -95,6 +100,7 @@ function SM(data) {
 
         client.left(speedBoost);
         setTimeout(function() {
+          blinkRed();
           client.left(speed);
         }, boostTimeOut);
 
